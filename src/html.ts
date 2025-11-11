@@ -1,11 +1,13 @@
-import { TemplateResult } from './template-result.js';
+import { createTemplateResult, type TemplateResult } from './template-result.ts';
 
 /**
  * Tagged template function for creating HTML templates.
+ * Pure function that returns an immutable TemplateResult.
  *
  * @example
  * const template = html`<div>${content}</div>`;
  */
-export function html(strings: TemplateStringsArray, ...values: any[]): TemplateResult {
-  return new TemplateResult(strings, values);
-}
+export const html = (
+  strings: TemplateStringsArray,
+  ...values: unknown[]
+): TemplateResult => createTemplateResult(strings, values);

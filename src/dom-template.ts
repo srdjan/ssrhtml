@@ -1,14 +1,16 @@
-import { html as htmlFn } from './html.js';
+import { html as htmlFn } from './html.ts';
 import {
+  createMockBody as createMockBodyFn,
+  createRenderer as createRendererFn,
+  makeRenderable as makeRenderableFn,
   render as renderFn,
   renderToString as renderToStringFn,
-  makeRenderable as makeRenderableFn,
-  createMockBody as createMockBodyFn
-} from './render.js';
-import { TemplateResult as TemplateResultClass } from './template-result.js';
+} from './render.ts';
+import type { TemplateResult as TemplateResultType } from './template-result.ts';
 
 /**
  * DOMTemplate namespace - main API for the library
+ * Provides a functional approach to HTML template rendering
  */
 export namespace DOMTemplate {
   /**
@@ -37,7 +39,12 @@ export namespace DOMTemplate {
   export const createMockBody = createMockBodyFn;
 
   /**
-   * TemplateResult class
+   * Create a render function bound to a specific target (curried)
    */
-  export type TemplateResult = TemplateResultClass;
+  export const createRenderer = createRendererFn;
+
+  /**
+   * TemplateResult type
+   */
+  export type TemplateResult = TemplateResultType;
 }

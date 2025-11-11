@@ -1,4 +1,4 @@
-import { DOMTemplate } from './index.js';
+import { DOMTemplate } from './index.ts';
 
 // Extract html from DOMTemplate as shown in the example
 const { html } = DOMTemplate;
@@ -12,7 +12,7 @@ const page = (title: string, body: string) => html`
 
 // For SSR, we create a mock document.body
 const document = {
-  body: DOMTemplate.createMockBody()
+  body: DOMTemplate.createMockBody(),
 };
 
 console.log('=== SSR HTML Template Example ===\n');
@@ -40,7 +40,7 @@ const card = (title: string, content: string) => html`
   </div>
 `;
 
-const pageWithCards = (cards: any[]) => html`
+const pageWithCards = (cards: unknown[]) => html`
   <div class="container">
     ${cards}
   </div>
@@ -50,7 +50,7 @@ const cardsBody = DOMTemplate.createMockBody();
 cardsBody.render!(pageWithCards([
   card('Card 1', 'Content for card 1'),
   card('Card 2', 'Content for card 2'),
-  card('Card 3', 'Content for card 3')
+  card('Card 3', 'Content for card 3'),
 ]));
 
 console.log('Nested templates with array:');
@@ -71,6 +71,19 @@ console.log(safeBody.innerHTML);
 console.log();
 
 // Using renderToString directly
-const directRender = DOMTemplate.renderToString(page('Direct Render', 'No body object needed'));
+const directRender = DOMTemplate.renderToString(
+  page('Direct Render', 'No body object needed'),
+);
 console.log('Direct string rendering:');
 console.log(directRender);
+console.log();
+
+// Functional programming example: curried renderer
+console.log('=== Functional Programming Example ===\n');
+const body = DOMTemplate.createMockBody();
+const renderToBody = DOMTemplate.createRenderer(body);
+
+// Now we can use the curried function
+renderToBody(page('Curried Render', 'Using functional composition'));
+console.log('Curried renderer:');
+console.log(body.innerHTML);

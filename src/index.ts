@@ -1,11 +1,20 @@
 /**
- * SSR HTML Template Library
+ * SSR HTML Template Library for Deno
  *
- * A lightweight library for rendering HTML templates using tagged template literals,
+ * A lightweight, functional library for rendering HTML templates using tagged template literals,
  * designed to work in both browser and server-side (SSR) environments.
+ *
+ * @module
  */
 
-export { TemplateResult } from './template-result.js';
-export { html } from './html.js';
-export { render, renderToString, makeRenderable, createMockBody, RenderTarget } from './render.js';
-export { DOMTemplate } from './dom-template.js';
+export type { TemplateResult } from './template-result.ts';
+export { html } from './html.ts';
+export {
+  createMockBody,
+  createRenderer,
+  makeRenderable,
+  render,
+  renderToString,
+  type RenderTarget,
+} from './render.ts';
+export { DOMTemplate } from './dom-template.ts';
